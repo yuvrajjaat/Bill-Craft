@@ -69,7 +69,7 @@ A full-stack invoice management platform built for freelancers and small busines
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/BillCraft.git
+git clone https://github.com/yuvrajjaat/Bill-Craft.git
 cd BillCraft
 ```
 
@@ -241,7 +241,3 @@ BillCraft/
 ```
 
 ---
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
