@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: A4;
+            margin: 0.5cm 1cm;
+        }
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 10px;
+            color: #334155;
+            margin: 0;
+            padding: 0;
+        }
+
+        table { border-collapse: collapse; }
+        td, th { padding: 0; }
+
+        .accent-bar {
+            background-color: #6366f1;
+            height: 5px;
+            width: 100%;
+            margin-bottom: 18px;
+        }
+
+        /* Header */
+        .company-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #6366f1;
+        }
+        .company-info {
+            font-size: 9px;
+            color: #64748b;
+            line-height: 1.4;
+            padding-top: 3px;
+        }
+        .invoice-type {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e293b;
+            text-align: right;
+        }
+        .invoice-num {
+            font-size: 11px;
+            color: #6366f1;
+            text-align: right;
+            font-weight: bold;
+            padding-top: 2px;
+        }
+        .status-badge {
+            font-size: 8px;
+            font-weight: bold;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 3px 12px;
+        }
+
+        .divider {
+            border-bottom: 1px solid #e2e8f0;
+            height: 1px;
+            margin: 10px 0;
+        }
+
+        /* Info labels */
+        .lbl {
+            font-size: 8px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            padding-bottom: 3px;
+        }
+        .val-name {
+            font-size: 12px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+        .val-detail {
+            font-size: 9px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+        .val-date {
+            font-size: 11px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        /* Items table */
+        .items th {
+            background-color: #6366f1;
+            color: #fff;
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: bold;
+            text-align: left;
+            padding: 6px 8px;
+        }
+        .items td {
+            font-size: 10px;
+            padding: 6px 8px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .items td:first-child { font-weight: 500; }
+        .items .alt td { background-color: #fafaff; }
+        .right { text-align: right; }
+
+        /* Totals */
+        .totals-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+        }
+        .t-label {
+            font-size: 9px;
+            color: #64748b;
+            padding: 2px 0;
+        }
+        .t-value {
+            font-size: 9px;
+            color: #1e293b;
+            font-weight: 600;
+            text-align: right;
+            padding: 2px 0;
+        }
+        .t-sep {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 4px;
+        }
+        .t-grand .t-label {
+            font-size: 11px;
+            color: #6366f1;
+            font-weight: bold;
+        }
+        .t-grand .t-value {
+            font-size: 11px;
+            color: #6366f1;
+            font-weight: bold;
+        }
+        .t-balance .t-label {
+            font-size: 11px;
+            color: #1e293b;
+            font-weight: bold;
+        }
+        .t-balance .t-value {
+            font-size: 11px;
+            color: #1e293b;
+            font-weight: bold;
+        }
+
+        /* Notes */
+        .notes-box {
+            background-color: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 8px 12px;
+            margin-top: 14px;
+        }
+        .notes-heading {
+            font-size: 8px;
+            color: #6366f1;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .notes-text {
+            font-size: 9px;
+            color: #64748b;
+            padding-top: 2px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 16px;
+            padding-top: 8px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 8px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="accent-bar"></div>
+
+    <!-- HEADER -->
+    <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="width:55%; vertical-align:top;">
+                <div class="company-name">{{ companyName or 'BillCraft' }}</div>
+                <div class="company-info">
+                    {% if companyEmail %}{{ companyEmail }}<br>{% endif %}
+                    {% if companyPhone %}{{ companyPhone }}<br>{% endif %}
+                    {% if companyAddress %}{{ companyAddress }}<br>{% endif %}
+                    {% if companyWebsite %}{{ companyWebsite }}{% endif %}
+                </div>
+            </td>
+            <td style="width:45%; vertical-align:top;">
+                <div class="invoice-type">{{ invoiceType or 'INVOICE' }}</div>
+                <div class="invoice-num"># {{ invoiceNumber }}</div>
+            </td>
+        </tr>
+    </table>
+
+    <div style="padding: 8px 0 0 0;">
+        <span class="status-badge" style="background-color: {{ statusColor }};">{{ status }}</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- BILL TO / DATES -->
+    <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="width:45%; vertical-align:top;">
+                <div class="lbl">Bill To</div>
+                <div class="val-name">{{ clientName }}</div>
+                <div class="val-detail">
+                    {% if clientEmail %}{{ clientEmail }}<br>{% endif %}
+                    {% if clientPhone %}{{ clientPhone }}<br>{% endif %}
+                    {% if clientAddress %}{{ clientAddress }}{% endif %}
+                </div>
+            </td>
+            <td style="width:27%; vertical-align:top;">
+                <div class="lbl">Date Issued</div>
+                <div class="val-date">{{ createdAt }}</div>
+            </td>
+            <td style="width:28%; vertical-align:top;">
+                <div class="lbl">Due Date</div>
+                <div class="val-date">{{ dueDate }}</div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- ITEMS -->
+    <table class="items" width="100%" cellpadding="0" cellspacing="0" style="margin-top:14px;">
+        <tr>
+            <th style="width:35%;">Item</th>
+            <th style="width:10%;">Qty</th>
+            <th style="width:20%;">Price</th>
+            <th style="width:15%;">Disc.</th>
+            <th style="width:20%;" class="right">Amount</th>
+        </tr>
+        {% for item in items %}
+        <tr{% if loop.index is even %} class="alt"{% endif %}>
+            <td>{{ item.itemName }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ currency }} {{ "%.2f"|format(item.unitPrice|default(0)|float) }}</td>
+            <td>{{ item.discount|default('0') }}%</td>
+            <td class="right">{{ currency }} {{ "%.2f"|format((item.unitPrice|default(0)|float) * (item.quantity|default(0)|float)) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- TOTALS -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:6px;">
+        <tr>
+            <td style="width:55%;">&nbsp;</td>
+            <td style="width:45%; vertical-align:top;">
+                <div class="totals-box">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td class="t-label">Subtotal</td>
+                            <td class="t-value">{{ currency }} {{ subTotal }}</td>
+                        </tr>
+                        <tr>
+                            <td class="t-label">VAT ({{ vat }}%)</td>
+                            <td class="t-value">{{ currency }} {{ vatAmount }}</td>
+                        </tr>
+                        <tr class="t-grand">
+                            <td class="t-label t-sep">Total</td>
+                            <td class="t-value t-sep">{{ currency }} {{ total }}</td>
+                        </tr>
+                        <tr>
+                            <td class="t-label">Paid</td>
+                            <td class="t-value">{{ currency }} {{ totalAmountReceived }}</td>
+                        </tr>
+                        <tr class="t-balance">
+                            <td class="t-label t-sep">Balance Due</td>
+                            <td class="t-value t-sep">{{ currency }} {{ balanceDue }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- NOTES -->
+    {% if notes %}
+    <div class="notes-box">
+        <div class="notes-heading">Notes</div>
+        <div class="notes-text">{{ notes }}</div>
+    </div>
+    {% endif %}
+
+    <div class="footer">Generated by BillCraft Invoice Management System</div>
+</body>
+</html>

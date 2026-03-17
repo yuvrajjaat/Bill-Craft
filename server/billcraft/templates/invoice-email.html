@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6366f1;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #6366f1;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 15px 0;
+        }
+        .amount-section {
+            text-align: center;
+            margin: 25px 0;
+        }
+        .amount-label {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+        .amount-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #6366f1;
+            color: white !important;
+            padding: 14px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        .btn-section {
+            text-align: center;
+        }
+        .footer-text {
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="logo-section">
+                <div class="company-name">{{ companyName or 'BillCraft' }}</div>
+            </div>
+
+            <div style="text-align: center;">
+                <span class="badge">Invoice {{ invoiceNumber }}</span>
+            </div>
+
+            <div class="amount-section">
+                <div class="amount-label">Balance Due</div>
+                <div class="amount-value">{{ currency }} {{ balance }}</div>
+            </div>
+
+            {% if link %}
+            <div class="btn-section">
+                <a href="{{ link }}" class="btn">View Invoice Online</a>
+            </div>
+            {% endif %}
+
+            <div class="footer-text">
+                <p>This invoice was sent from {{ companyName or 'BillCraft' }}.</p>
+                <p>If you have questions, please contact us.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

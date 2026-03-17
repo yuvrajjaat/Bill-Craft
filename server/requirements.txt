@@ -1,0 +1,10 @@
+Django>=4.2,<5.0
+djangorestframework>=3.14
+pymongo>=4.6
+dnspython>=2.4
+PyJWT>=2.8
+bcrypt>=4.1
+django-cors-headers>=4.3
+xhtml2pdf>=0.2.11
+Jinja2>=3.1
+python-dotenv>=1.0
